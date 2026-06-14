@@ -1,0 +1,37 @@
+name: APERTURE Daily Jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create report
+        run: |
+          mkdir -p reports
+
+          cat > reports/daily_report.md << EOF
+          # APERTURE Daily Report
+
+          ## APPLY
+
+          - Stanford TPM
+          - Kaiser PM
+          - AI Program Manager
+
+          ## TOP SKILLS
+
+          - AI
+          - SQL
+          - Automation
+          EOF
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: aperture-report
+          path: reports/daily_report.md
