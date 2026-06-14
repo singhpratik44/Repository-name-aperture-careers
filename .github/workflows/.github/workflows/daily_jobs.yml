@@ -8,7 +8,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Hello
+      - uses: actions/checkout@v4
+
+      - name: APERTURE Online
         run: |
-          echo "APERTURE ONLINE"
-          echo "Job Finder Ready"
+          mkdir -p reports
+
+          cat > reports/daily_report.md << EOF
+          # APERTURE Daily Report
+
+          ## APPLY
+
+          - Stanford TPM
+          - Kaiser PM
+          - AI Program Manager
+
+          ## TOP SKILLS
+
+          - AI
+          - SQL
+          - Automation
+          EOF
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: aperture-report
+          path: reports/daily_report.md
